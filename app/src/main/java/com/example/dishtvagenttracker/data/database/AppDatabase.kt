@@ -7,6 +7,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.dishtvagenttracker.data.dao.DailyEntryDao
 import com.example.dishtvagenttracker.data.model.DailyEntry
+import com.example.dishtvagenttracker.data.model.CSATEntry
+import com.example.dishtvagenttracker.data.model.CQEntry
 
 @Database(entities = [DailyEntry::class, CSATEntry::class, CQEntry::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
