@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Dishtvagenttracker">
+        <activity android:name=".dashboard.DashboardActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+        
+        <activity android:name=".monthly_performance.MonthlyPerformanceActivity" />
+        <activity android:name=".reports.AllReportsActivity" />
+        <activity android:name=".onboarding.OnboardingActivity" />
+        <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".goals.SetGoalsActivity" />
+        <activity android:name=".theme_selection.ThemeSelectionActivity" />
+        <activity android:name=".app_info.AppInfoActivity" />
+    <activity android:name=".new_entry.NewEntrySelectionActivity" />
+        <activity android:name=".new_entry.AddDailyEntryActivity" />
+        <activity android:name=".new_entry.AddCSATEntryActivity" />
+        <activity android:name=".new_entry.AddCQEntryActivity" />
+        <activity android:name=".new_entry.EditDailyEntryActivity" />
+        <activity android:name=".csat_cq_summary.MonthlyCSATActivity" />
+        <activity android:name=".csat_cq_summary.MonthlyCQActivity" />
+        <activity android:name=".new_entry.EditCSATEntryActivity" />
+        <activity android:name=".csat_entries.AllCSATEntriesActivity" />
+        <activity android:name=".cq_entries.AllCQEntriesActivity" />
+        <activity android:name=".new_entry.EditCQEntryActivity" />
+    </application>
+
+</manifest>
