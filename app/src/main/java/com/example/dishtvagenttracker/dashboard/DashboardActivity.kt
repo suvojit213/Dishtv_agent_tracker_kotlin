@@ -96,6 +96,7 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this, AllCSATEntriesActivity::class.java)
             startActivity(intent)
         }
+    } // End of onCreate
 
     override fun onResume() {
         super.onResume()
