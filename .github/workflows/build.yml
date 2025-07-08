@@ -5,6 +5,8 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -13,18 +15,40 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
+
     - name: Generate Gradle wrapper if missing
       run: |
         if [ ! -f gradlew ]; then
           gradle wrapper
         fi
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+
+    - name: Build Debug and Release APKs
+      run: ./gradlew assembleDebug assembleRelease
+
+    - name: Find Release APK file
+      id: find_apk
+      if: github.event_name == 'release' && github.event.action == 'published'
+      run: |
+        APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
+        echo "APK_PATH=$APK_PATH" >> $GITHUB_OUTPUT
+
+    - name: Upload Release Asset
+      if: github.event_name == 'release' && github.event.action == 'published'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ${{ steps.find_apk.outputs.APK_PATH }}
+        asset_name: app-release.apk
+        asset_content_type: application/vnd.android.package-archive
