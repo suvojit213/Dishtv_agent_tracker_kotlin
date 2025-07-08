@@ -1,35 +1,50 @@
+# Name of your workflow
 name: Android CI/CD (Kotlin)
 
+# Controls when the workflow will run
 on: 
   push:
     branches:
-      - main
+      - main # Runs on pushes to the main branch
   release:
     types:
-      - created
+      - created # Runs when a new release is published
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Step 1: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Step 2: Sets up JDK 17 for building the Android app
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      # (Optional but Recommended) Step to list all files to debug path issues
+      - name: List files in the workspace
+        run: ls -R
+        
+      # Step 3: Grant execute permission to the gradlew script
+      # This command is now run from the root of your repository
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
-        working-directory: kotlin_version
 
+      # Step 4: Build the app using Gradle
+      # This will generate the release APK
       - name: Build with Gradle
         run: ./gradlew assembleRelease
-        working-directory: kotlin_version
 
+      # Step 5: Upload the generated APK to the GitHub Release
+      # This step only runs if the event that triggered the workflow was a release creation
       - name: Upload APK to GitHub Release
         if: github.event_name == 'release' && github.event.action == 'created'
         uses: actions/upload-release-asset@v1
@@ -40,3 +55,4 @@ jobs:
           asset_path: ./app/build/outputs/apk/release/app-release.apk # Path to the APK file
           asset_name: app-release.apk # Name of the asset
           asset_content_type: application/vnd.android.package-archive # Content-type of the asset
+

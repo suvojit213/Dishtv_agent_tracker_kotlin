@@ -1,5 +1,5 @@
 # Name of your workflow
-name: Android CI/CD (Kotlin)
+name: Android CI/CD (Kotlin) - Auto Path Detection
 
 # Controls when the workflow will run
 on: 
@@ -18,7 +18,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Step 1: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Step 1: Checks-out your repository under $GITHUB_WORKSPACE
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -29,21 +29,35 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # (Optional but Recommended) Step to list all files to debug path issues
-      - name: List files in the workspace
-        run: ls -R
+      # Step 3: Find the project directory (where gradlew is located)
+      # This is the magic step!
+      # It finds the 'gradlew' file, gets its directory, and saves the path
+      # into an environment variable called PROJECT_PATH for other steps to use.
+      - name: Find gradlew path
+        id: find_gradle
+        run: |
+          GRADLEW_PATH=$(find . -name gradlew -type f | head -n 1)
+          if [ -z "$GRADLEW_PATH" ]; then
+            echo "Error: gradlew file not found."
+            exit 1
+          fi
+          PROJECT_DIR=$(dirname "$GRADLEW_PATH")
+          echo "Project directory found: $PROJECT_DIR"
+          echo "PROJECT_PATH=$PROJECT_DIR" >> $GITHUB_ENV
         
-      # Step 3: Grant execute permission to the gradlew script
-      # This command is now run from the root of your repository
+      # Step 4: Grant execute permission to the gradlew script
+      # It now uses the PROJECT_PATH variable we created in the previous step.
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
+        working-directory: ${{ env.PROJECT_PATH }}
 
-      # Step 4: Build the app using Gradle
-      # This will generate the release APK
+      # Step 5: Build the app using Gradle
+      # This step also uses the automatically detected path.
       - name: Build with Gradle
         run: ./gradlew assembleRelease
+        working-directory: ${{ env.PROJECT_PATH }}
 
-      # Step 5: Upload the generated APK to the GitHub Release
+      # Step 6: Upload the generated APK to the GitHub Release
       # This step only runs if the event that triggered the workflow was a release creation
       - name: Upload APK to GitHub Release
         if: github.event_name == 'release' && github.event.action == 'created'
@@ -52,7 +66,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions automatically
         with:
           upload_url: ${{ github.event.release.upload_url }} # URL to upload release asset to
-          asset_path: ./app/build/outputs/apk/release/app-release.apk # Path to the APK file
+          # The asset path is now built dynamically using the found path
+          asset_path: ${{ env.PROJECT_PATH }}/app/build/outputs/apk/release/app-release.apk
           asset_name: app-release.apk # Name of the asset
           asset_content_type: application/vnd.android.package-archive # Content-type of the asset
 
