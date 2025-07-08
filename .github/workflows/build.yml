@@ -22,11 +22,18 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Setup Gradle
+        uses: actions/setup-gradle@v3
+        with:
+          gradle-version: '8.x' # Specify the Gradle version you want to install, e.g., '8.x' or '8.5'
+
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
+        working-directory: kotlin_version
 
       - name: Build with Gradle
         run: ./gradlew assembleRelease
+        working-directory: kotlin_version
 
       - name: Upload APK to GitHub Release
         if: github.event_name == 'release' && github.event.action == 'created'
