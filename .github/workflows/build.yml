@@ -33,36 +33,16 @@ jobs:
           # Ek stable Gradle version chunn lein
           gradle-version: '8.7'
 
-      # Step 4: Project ka root folder dhoondhna aur Wrapper banana
-      # YEH HAI ASLI JAADU!
-      - name: Find Project and Generate Wrapper
-        id: find_and_generate
+      # Step 4: Gradle Wrapper banana
+      - name: Generate Gradle Wrapper
         run: |
-          # Ye script 'build.gradle' ya 'build.gradle.kts' file dhoondhegi
-          BUILD_FILE=$(find . -name "build.gradle" -o -name "build.gradle.kts" | head -n 1)
-          if [[ -z "$BUILD_FILE" ]]; then
-            echo "::error::build.gradle ya build.gradle.kts file nahi mili!"
-            exit 1
-          fi
-          
-          # File ka folder path nikaalna
-          PROJECT_DIR=$(dirname "$BUILD_FILE")
-          echo "Project directory mili: $PROJECT_DIR"
-          
-          # Iss path ko agle steps ke liye save karna
-          echo "PROJECT_PATH=$PROJECT_DIR" >> $GITHUB_ENV
-          
-          # Sahi directory mein jaakar wrapper banana
-          cd "$PROJECT_DIR"
-          echo "Gradle wrapper banaya ja raha hai $(pwd) mein..."
-          # Ye command gradlew, gradlew.bat, aur gradle folder bana degi
+          echo "Gradle wrapper banaya ja raha hai repository root mein..."
           gradle wrapper
 
       # Step 5: Ab banaye gaye Gradle Wrapper se App ko build karna
       # Ab humein 100% pata hai ki gradlew file maujood hai
       - name: Build with Gradle Wrapper
         run: ./gradlew assembleRelease
-        working-directory: ${{ env.PROJECT_PATH }}
 
       # Step 6: Release hone par APK ko upload karna
       - name: Upload APK to GitHub Release
@@ -72,7 +52,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ${{ env.PROJECT_PATH }}/app/build/outputs/apk/release/app-release.apk
+          asset_path: app/build/outputs/apk/release/app-release.apk
           asset_name: app-release.apk
           asset_content_type: application/vnd.android.package-archive
 
