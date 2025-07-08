@@ -12,15 +12,8 @@ import com.example.dishtvagenttracker.R
 import com.example.dishtvagenttracker.data.database.AppDatabase
 import com.example.dishtvagenttracker.data.model.DailyEntry
 import com.example.dishtvagenttracker.dashboard.adapter.DailyEntryAdapter
-import com.example.dishtvagenttracker.goals.SetGoalsActivity
-import com.example.dishtvagenttracker.reports.AllReportsActivity
-import com.example.dishtvagenttracker.settings.SettingsActivity
 import com.example.dishtvagenttracker.utils.GoalManager
-import com.example.dishtvagenttracker.new_entry.NewEntrySelectionActivity
-import com.example.dishtvagenttracker.monthly_performance.MonthlyPerformanceActivity
-import com.example.dishtvagenttracker.csat_cq_summary.MonthlyCSATActivity
-import com.example.dishtvagenttracker.csat_cq_summary.MonthlyCQActivity
-import com.example.dishtvagenttracker.csat_entries.AllCSATEntriesActivity
+import com.example.dishtvagenttracker.new_entry.AddDailyEntryActivity
 import com.example.dishtvagenttracker.new_entry.EditDailyEntryActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,10 +23,6 @@ import kotlinx.coroutines.withContext
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var addEntryButton: Button
-    private lateinit var monthlyPerformanceButton: Button
-    private lateinit var allReportsButton: Button
-    private lateinit var settingsButton: Button
-    private lateinit var setGoalsButton: Button
     private lateinit var dailyEntriesRecyclerView: RecyclerView
     private lateinit var dailyEntryAdapter: DailyEntryAdapter
     private lateinit var database: AppDatabase
@@ -49,12 +38,6 @@ class DashboardActivity : AppCompatActivity() {
         goalManager = GoalManager(applicationContext)
 
         addEntryButton = findViewById(R.id.addEntryButton)
-        monthlyPerformanceButton = findViewById(R.id.monthlyPerformanceButton)
-        allReportsButton = findViewById(R.id.allReportsButton)
-        settingsButton = findViewById(R.id.settingsButton)
-        setGoalsButton = findViewById(R.id.setGoalsButton)
-        val viewCSATSummaryButton: Button = findViewById(R.id.viewCSATSummaryButton)
-        val viewCQSummaryButton: Button = findViewById(R.id.viewCQSummaryButton)
         dailyEntriesRecyclerView = findViewById(R.id.dailyEntriesRecyclerView)
         goalHoursTextView = findViewById(R.id.goalHoursTextView)
         goalCallsTextView = findViewById(R.id.goalCallsTextView)
@@ -62,43 +45,7 @@ class DashboardActivity : AppCompatActivity() {
         dailyEntriesRecyclerView.layoutManager = LinearLayoutManager(this)
 
         addEntryButton.setOnClickListener {
-            val intent = Intent(this, NewEntrySelectionActivity::class.java)
-            startActivity(intent)
-        }
-
-        monthlyPerformanceButton.setOnClickListener {
-            val intent = Intent(this, MonthlyPerformanceActivity::class.java)
-            startActivity(intent)
-        }
-
-        allReportsButton.setOnClickListener {
-            val intent = Intent(this, AllReportsActivity::class.java)
-            startActivity(intent)
-        }
-
-        settingsButton.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
-        }
-
-        setGoalsButton.setOnClickListener {
-            val intent = Intent(this, SetGoalsActivity::class.java)
-            startActivity(intent)
-        }
-
-        viewCSATSummaryButton.setOnClickListener {
-            val intent = Intent(this, MonthlyCSATActivity::class.java)
-            startActivity(intent)
-        }
-
-        viewCQSummaryButton.setOnClickListener {
-            val intent = Intent(this, MonthlyCQActivity::class.java)
-            startActivity(intent)
-        }
-
-        val viewAllCSATEntriesButton: Button = findViewById(R.id.viewAllCSATEntriesButton)
-        viewAllCSATEntriesButton.setOnClickListener {
-            val intent = Intent(this, AllCSATEntriesActivity::class.java)
+            val intent = Intent(this, AddDailyEntryActivity::class.java)
             startActivity(intent)
         }
     } // End of onCreate

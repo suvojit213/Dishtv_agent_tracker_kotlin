@@ -18,26 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        
-        <activity android:name=".monthly_performance.MonthlyPerformanceActivity" />
-        <activity android:name=".reports.AllReportsActivity" />
         <activity android:name=".onboarding.OnboardingActivity" />
-        <activity android:name=".settings.SettingsActivity" />
-        <activity android:name=".goals.SetGoalsActivity" />
-        <activity android:name=".theme_selection.ThemeSelectionActivity" />
-        <activity android:name=".app_info.AppInfoActivity" />
-    <activity android:name=".new_entry.NewEntrySelectionActivity" />
         <activity android:name=".new_entry.AddDailyEntryActivity" />
-        <activity android:name=".new_entry.AddCSATEntryActivity" />
-        <activity android:name=".new_entry.AddCQEntryActivity" />
         <activity android:name=".new_entry.EditDailyEntryActivity" />
-        <activity android:name=".csat_cq_summary.MonthlyCSATActivity" />
-        <activity android:name=".csat_cq_summary.MonthlyCQActivity" />
-        <activity android:name=".new_entry.EditCSATEntryActivity" />
-        <activity android:name=".csat_entries.AllCSATEntriesActivity" />
-        <activity android:name=".cq_entries.AllCQEntriesActivity" />
-        <activity android:name=".new_entry.EditCQEntryActivity" />
     </application>
 
 </manifest>

@@ -10,13 +10,11 @@ import com.example.dishtvagenttracker.data.model.DailyEntry
 import com.example.dishtvagenttracker.data.model.CSATEntry
 import com.example.dishtvagenttracker.data.model.CQEntry
 
-@Database(entities = [DailyEntry::class, CSATEntry::class, CQEntry::class], version = 2, exportSchema = false)
+@Database(entities = [DailyEntry::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun dailyEntryDao(): DailyEntryDao
-    abstract fun csatEntryDao(): CSATEntryDao
-    abstract fun cqEntryDao(): CQEntryDao
 
     companion object {
         @Volatile
