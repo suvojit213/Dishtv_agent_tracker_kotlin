@@ -5,8 +5,6 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  release:
-    types: [published]
 
 jobs:
   build:
@@ -23,32 +21,26 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Generate Gradle wrapper if missing
-      run: |
-        if [ ! -f gradlew ]; then
-          gradle wrapper
-        fi
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Debug and Release APKs
-      run: ./gradlew assembleDebug assembleRelease
+    - name: Build Release APK
+      run: ./gradlew assembleRelease
 
-    - name: Find Release APK file
-      id: find_apk
-      if: github.event_name == 'release' && github.event.action == 'published'
+    - name: Get current date and commit SHA
+      id: get_info
       run: |
-        APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
-        echo "APK_PATH=$APK_PATH" >> $GITHUB_OUTPUT
+        echo "RELEASE_TAG=build-${{ github.sha }}" >> $GITHUB_OUTPUT
+        echo "RELEASE_NAME=Build from ${{ github.sha }}" >> $GITHUB_OUTPUT
 
-    - name: Upload Release Asset
-      if: github.event_name == 'release' && github.event.action == 'published'
-      uses: actions/upload-release-asset@v1
+    - name: Create or Update GitHub Release and Upload APK
+      uses: softprops/action-gh-release@v1
+      if: success() # Only create release if build is successful
+      with:
+        tag_name: ${{ steps.get_info.outputs.RELEASE_TAG }}
+        name: ${{ steps.get_info.outputs.RELEASE_NAME }}
+        # draft: true # Create as a draft release
+        prerelease: false
+        files: app/build/outputs/apk/release/*.apk # Path to your APK
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ${{ steps.find_apk.outputs.APK_PATH }}
-        asset_name: app-release.apk
-        asset_content_type: application/vnd.android.package-archive
