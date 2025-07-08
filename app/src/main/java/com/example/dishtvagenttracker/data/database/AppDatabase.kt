@@ -15,8 +15,8 @@ import com.example.dishtvagenttracker.data.model.CQEntry
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun dailyEntryDao(): DailyEntryDao
-    // abstract fun csatEntryDao(): CSATEntryDao
-    // abstract fun cqEntryDao(): CQEntryDao
+    abstract fun csatEntryDao(): CSATEntryDao
+    abstract fun cqEntryDao(): CQEntryDao
 
     companion object {
         @Volatile

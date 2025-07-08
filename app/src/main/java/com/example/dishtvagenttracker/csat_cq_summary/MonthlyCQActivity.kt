@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dishtvagenttracker.R
 import com.example.dishtvagenttracker.data.database.AppDatabase
 import com.example.dishtvagenttracker.csat_cq_summary.adapter.CQSummaryAdapter
+import com.example.dishtvagenttracker.data.dao.CQEntryDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

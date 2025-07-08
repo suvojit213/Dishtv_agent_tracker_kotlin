@@ -39,8 +39,8 @@ class MonthlyPerformanceActivity : AppCompatActivity() {
                 val csatSummaries = database.csatEntryDao().getMonthlyCSATSummaries()
 
                 val monthlySummaries = dailySummariesRaw.map { dailySummary ->
-                    val matchingCSATSummary = csatSummaries.find {
-                        it.month == dailySummary.month && it.year == dailySummary.year
+                    val matchingCSATSummary = csatSummaries.find { csatSummaryItem ->
+                        csatSummaryItem.month == dailySummary.month && csatSummaryItem.year == dailySummary.year
                     }
                     MonthlySummary(
                         month = dailySummary.month,

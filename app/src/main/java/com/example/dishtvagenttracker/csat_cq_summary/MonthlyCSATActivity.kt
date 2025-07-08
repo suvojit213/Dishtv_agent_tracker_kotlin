@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dishtvagenttracker.R
 import com.example.dishtvagenttracker.data.database.AppDatabase
 import com.example.dishtvagenttracker.csat_cq_summary.adapter.CSATSummaryAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.dishtvagenttracker.data.dao.CSATEntryDao
 
 class MonthlyCSATActivity : AppCompatActivity() {
 
@@ -36,7 +33,7 @@ class MonthlyCSATActivity : AppCompatActivity() {
             try {
                 val csatSummaries = database.csatEntryDao().getMonthlyCSATSummaries()
                 withContext(Dispatchers.Main) {
-                    csatSummaryAdapter = CSATSummaryAdapter(csatSummaries)
+                    csatSummaryAdapter = CSATSummaryAdapter(csatSummaries) { /* No-op for now, as onEditClick is not implemented */ }
                     csatSummariesRecyclerView.adapter = csatSummaryAdapter
                     if (csatSummaries.isEmpty()) {
                         Toast.makeText(this@MonthlyCSATActivity, "No monthly CSAT summaries found.", Toast.LENGTH_SHORT).show()

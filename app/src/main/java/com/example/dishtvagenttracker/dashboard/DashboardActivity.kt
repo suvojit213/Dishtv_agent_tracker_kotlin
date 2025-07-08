@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dishtvagenttracker.R
-import com.example.dishtvagenttracker.add_entry.AddEntryActivity
 import com.example.dishtvagenttracker.data.database.AppDatabase
 import com.example.dishtvagenttracker.data.model.DailyEntry
 import com.example.dishtvagenttracker.dashboard.adapter.DailyEntryAdapter
@@ -17,6 +16,12 @@ import com.example.dishtvagenttracker.goals.SetGoalsActivity
 import com.example.dishtvagenttracker.reports.AllReportsActivity
 import com.example.dishtvagenttracker.settings.SettingsActivity
 import com.example.dishtvagenttracker.utils.GoalManager
+import com.example.dishtvagenttracker.new_entry.NewEntrySelectionActivity
+import com.example.dishtvagenttracker.monthly_performance.MonthlyPerformanceActivity
+import com.example.dishtvagenttracker.csat_cq_summary.MonthlyCSATActivity
+import com.example.dishtvagenttracker.csat_cq_summary.MonthlyCQActivity
+import com.example.dishtvagenttracker.csat_entries.AllCSATEntriesActivity
+import com.example.dishtvagenttracker.new_entry.EditDailyEntryActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
