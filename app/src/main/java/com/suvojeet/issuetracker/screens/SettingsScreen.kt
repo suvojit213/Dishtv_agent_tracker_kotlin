@@ -52,8 +52,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardOptions
-import androidx.compose.ui.text.input.KeyboardType
 
 
 import androidx.compose.foundation.layout.Box
@@ -177,9 +175,7 @@ fun SettingsScreen(navController: NavController) {
                     value = adminPasswordInput,
                     onValueChange = { adminPasswordInput = it },
                     label = { Text("Enter password") },
-                    singleLine = true,
-                    visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                    singleLine = true
                 )
             },
             confirmButton = {
