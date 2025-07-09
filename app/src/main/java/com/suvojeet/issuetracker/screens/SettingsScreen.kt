@@ -50,8 +50,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardOptions
+import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.suvojeet.issuetracker.ui.components.SettingsTile
 import com.suvojeet.issuetracker.ui.theme.Poppins
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -197,43 +201,3 @@ fun SettingsScreen(navController: NavController) {
     }
 }
 
-@Composable
-fun SettingsTile(icon: ImageVector, title: String, subtitle: String, onClick: () -> Unit) {
-    ListItem(
-        modifier = Modifier.clickable(onClick = onClick),
-        leadingContent = {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(icon, contentDescription = title, tint = MaterialTheme.colorScheme.primary)
-            }
-        },
-        headlineContent = {
-            Text(
-                text = title,
-                style = TextStyle(
-                    fontFamily = Poppins,
-                    fontWeight = FontWeight.W600,
-                    fontSize = 16.sp,
-                )
-            )
-        },
-        supportingContent = {
-            Text(
-                text = subtitle,
-                style = TextStyle(
-                    fontFamily = Poppins,
-                    fontSize = 13.sp,
-                    color = Color.Gray,
-                )
-            )
-        },
-        trailingContent = {
-            Icon(Icons.Default.ArrowForwardIos, contentDescription = "Go", modifier = Modifier.size(16.dp), tint = Color.Gray)
-        }
-    )
-}

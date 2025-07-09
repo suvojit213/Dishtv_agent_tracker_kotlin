@@ -10,6 +10,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -43,6 +44,8 @@ import androidx.compose.material.icons.rounded.PlayCircleOutline
 import androidx.compose.material.icons.rounded.Send
 import androidx.compose.material.icons.rounded.StopCircle
 import androidx.compose.material.icons.rounded.SupervisorAccount
+import androidx.compose.material.icons.outlined.Badge
+import androidx.compose.material.icons.outlined.InfoOutlined
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -53,7 +56,7 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Material3Text
+
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.SnackbarHost
@@ -464,7 +467,7 @@ fun IssueTrackerScreen(navController: NavController) {
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = Color(0xFF1E3A8A).copy(alpha = 0.1f)),
                     shape = RoundedCornerShape(16.dp),
-                    border = Border.Properties(color = Color(0xFF1E3A8A).copy(alpha = 0.2f), width = 1.5.dp)
+                    border = BorderStroke(width = 1.5.dp, color = Color(0xFF1E3A8A).copy(alpha = 0.2f))
                 ) {
                     Row(
                         modifier = Modifier.padding(20.dp),
@@ -913,7 +916,7 @@ fun IssueRemarksField(
                     },
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White,
+                        unfocusedContainerContainerColor = Color.White,
                         disabledContainerColor = Color.White,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
