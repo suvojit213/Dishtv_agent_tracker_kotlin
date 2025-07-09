@@ -361,7 +361,7 @@ fun DashboardScreen(navController: NavController) {
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = Color.White,
                     shape = RoundedCornerShape(16.dp),
-                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
+                    elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 4.dp),
                     icon = { Icon(Icons.Rounded.AddTask, contentDescription = "Fill Issue Tracker") },
                     text = { Text("Fill Issue Tracker") }
                 )
@@ -370,7 +370,7 @@ fun DashboardScreen(navController: NavController) {
                     onClick = { navController.navigate("issue_tracker") },
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = Color.White,
-                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
+                    elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 4.dp)
                 ) {
                     Icon(Icons.Rounded.AddTask, contentDescription = "Fill Issue Tracker")
                 }

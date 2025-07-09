@@ -159,7 +159,7 @@ fun TimeInfoCard(issueDetails: Map<String, String>) {
 
 @Composable
 fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) {
-    var showImageDialog by remember { mutableStateOf<String?>(null) }
+    val showImageDialog by remember { mutableStateOf<String?>(null) }
 
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -179,12 +179,12 @@ fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) 
             ) {
                 items(imagePaths) { imagePath ->
                     Image(
-                        painter = rememberAsyncImagePainter(File(imagePath)),
+                        painter = rememberAsyncImagePainter(java.io.File(imagePath)),
                         contentDescription = null,
                         modifier = Modifier
                             .size(100.dp)
                             .clip(RoundedCornerShape(12.dp))
-                            .clickable { showImageDialog = imagePath },
+                            .clickable { showImageDialog.value = imagePath },
                         contentScale = ContentScale.Crop
                     )
                 }
@@ -192,8 +192,8 @@ fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) 
         }
     }
 
-    showImageDialog?.let { imagePath ->
-        Dialog(onDismissRequest = { showImageDialog = null }) {
+    showImageDialog.value?.let { imagePath ->
+        Dialog(onDismissRequest = { showImageDialog.value = null }) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

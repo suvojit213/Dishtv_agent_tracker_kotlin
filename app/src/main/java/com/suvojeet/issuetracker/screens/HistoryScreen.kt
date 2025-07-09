@@ -97,6 +97,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import com.suvojeet.issuetracker.data.dataStore
 import java.time.format.DateTimeParseException
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.rounded.Warning
@@ -574,7 +575,7 @@ fun HistoryList(
                     },
                     onDelete = { idx ->
                         coroutineScope.launch {
-                            userPreferencesRepository.dataStore.edit { preferences ->
+                            context.dataStore.edit { preferences ->
                                 val currentHistory = preferences[UserPreferencesRepository.PreferencesKeys.ISSUE_HISTORY] ?: emptySet()
                                 val updatedHistory = currentHistory.toMutableSet()
                                 val entryToDelete = filteredHistory[idx]

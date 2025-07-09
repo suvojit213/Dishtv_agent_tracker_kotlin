@@ -2,7 +2,7 @@ package com.suvojeet.issuetracker.utils
 
 fun parseHistoryEntry(entry: String): Map<String, String> {
     val parsedMap = mutableMapOf<String, String>()
-    val parts = entry.split(" \| ".toRegex())
+    val parts = entry.split(" \\| ".toRegex())
 
     for (part in parts) {
         val keyValue = part.split(": ", 2) // Split only on the first occurrence of ": "

@@ -62,6 +62,76 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.suvojeet.issuetracker.R
 import com.suvojeet.issuetracker.ui.theme.Poppins
+import android.content.Context
+
+// Utility function to launch URLs
+fun launchUrl(context: Context, url: String) {
+    try {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        context.startActivity(intent)
+    } catch (e: Exception) {
+        Toast.makeText(context, "Could not open link: ${e.message}", Toast.LENGTH_SHORT).show()
+    }
+}
+
+@Composable
+fun EnhancedSkillTag(skill: String) {
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(Color(0xFF3B82F6).copy(alpha = 0.1f))
+            .padding(horizontal = 10.dp, vertical = 6.dp)
+    ) {
+        Text(
+            text = skill,
+            style = TextStyle(
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF1E3A8A),
+                fontFamily = Poppins
+            )
+        )
+    }
+}
+
+@Composable
+fun EnhancedContactItem(icon: ImageVector, label: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color.White)
+            .clickable(onClick = onClick)
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(48.dp)
+                .clip(CircleShape)
+                .background(Color(0xFF3B82F6).copy(alpha = 0.1f)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = label,
+                tint = Color(0xFF1E3A8A),
+                modifier = Modifier.size(24.dp)
+            )
+        }
+        Spacer(modifier = Modifier.width(16.dp))
+        Text(
+            text = label,
+            style = TextStyle(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF1E3A8A),
+                fontFamily = Poppins
+            )
+        )
+    }
+}
+
 
 @Composable
 fun DeveloperInfoScreen(navController: NavController) {
@@ -111,341 +181,4 @@ fun DeveloperInfoScreen(navController: NavController) {
             ) {
                 Icon(
                     imageVector = Icons.Rounded.ArrowBackIosNew,
-                    contentDescription = "Back",
-                    tint = Color.White,
-                    modifier = Modifier.padding(8.dp)
-                )
-            }
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(
-                text = "Developer Info",
-                style = TextStyle(
-                    color = Color.White,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = Poppins
-                )
-            )
-        }
-
-        // Content
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .alpha(fadeAnimation)
-                .verticalScroll(rememberScrollState())
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            // Profile Section
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(32.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(140.dp)
-                            .clip(CircleShape)
-                            .background(
-                                brush = Brush.linearGradient(
-                                    colors = listOf(Color(0xFF1E3A8A), Color(0xFF3B82F6))
-                                )
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.developer_profile),
-                            contentDescription = "Developer Profile",
-                            modifier = Modifier
-                                .size(140.dp)
-                                .clip(CircleShape),
-                            contentScale = ContentScale.Crop
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Text(
-                        text = "Suvojeet Sengupta",
-                        style = TextStyle(
-                            color = Color(0xFF1E3A8A),
-                            fontSize = 32.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = Poppins,
-                        ),
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Mobile App Developer",
-                        style = TextStyle(
-                            color = Color.Gray,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.W600,
-                            fontFamily = Poppins,
-                        ),
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        EnhancedSkillTag("Flutter", Color(0xFF1E3A8A))
-                        Spacer(modifier = Modifier.width(12.dp))
-                        EnhancedSkillTag("Dart", Color(0xFF059669))
-                    }
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        EnhancedSkillTag("Mobile Development", Color(0xFFEF4444))
-                        Spacer(modifier = Modifier.width(12.dp))
-                        EnhancedSkillTag("UI/UX Design", Color(0xFF8B5CF6))
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // About Section
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White)
-            ) {
-                Column(
-                    modifier = Modifier.padding(24.dp)
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(
-                                    brush = Brush.linearGradient(
-                                        colors = listOf(Color(0xFF1E3A8A), Color(0xFF3B82F6))
-                                    )
-                                ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                        Icon(Icons.Outlined.Info, contentDescription = "About", tint = Color.White, modifier = Modifier.size(24.dp))
-                    }
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Text(
-                        text = "About the Developer",
-                        style = TextStyle(
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF1E3A8A),
-                            fontFamily = Poppins
-                        )
-                    )
-                }
-                Spacer(modifier = Modifier.height(20.dp))
-                Text(
-                    text = "Hi, I'm Suvojeet Sengupta – currently working as an Advisor at DishTV (GSC). I've always been interested in technology, and with some basic knowledge of Flutter and the help of AI tools, I started exploring app development.\n\nDuring my work, I noticed how time-consuming and frustrating it was to fill out Google Forms again and again for issue tracking. So, I created this simple app as a solution – to make the process smoother and more efficient.\n\nThis app may not be perfect, but it's built with real-life experience, practical thinking, and a passion to solve problems in smarter ways.",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        lineHeight = 24.sp,
-                        color = Color.DarkGray,
-                        fontWeight = FontWeight.W500,
-                        fontFamily = Poppins
-                    )
-                )
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // App Info
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E3A8A).copy(alpha = 0.1f)),
-                    shape = RoundedCornerShape(16.dp),
-                    border = CardDefaults.outlinedCardBorder
-                ) {
-                    Column(
-                        modifier = Modifier.padding(20.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(50.dp)
-                                    .clip(RoundedCornerShape(12.dp))
-                                    .background(
-                                        brush = Brush.linearGradient(
-                                            colors = listOf(Color(0xFF1E3A8A), Color(0xFF3B82F6))
-                                        )
-                                    ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.app_logo),
-                                    contentDescription = "App Logo",
-                                    modifier = Modifier.size(50.dp),
-                                    contentScale = ContentScale.Fit
-                                )
-                            }
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Column {
-                                Text(
-                                    text = "Issue Tracker App",
-                                    style = TextStyle(
-                                        fontSize = 18.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color(0xFF1E3A8A),
-                                        fontFamily = Poppins
-                                    )
-                                )
-                                Spacer(modifier = Modifier.height(4.dp))
-                                Text(
-                                    text = "Version 1.0.2",
-                                    style = TextStyle(
-                                        fontSize = 14.sp,
-                                        color = Color.Gray,
-                                        fontWeight = FontWeight.W500,
-                                        fontFamily = Poppins
-                                    )
-                                )
-                            }
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            text = "A smart issue tracking app built using basic Flutter skills and AI support — designed to replace repetitive Google Form entries with a faster, smoother, and more efficient solution, inspired by real work needs at DishTV (GSC).",
-                            style = TextStyle(
-                                fontSize = 15.sp,
-                                lineHeight = 22.5.sp,
-                                color = Color.DarkGray,
-                                fontWeight = FontWeight.W500,
-                                fontFamily = Poppins
-                            )
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Contact Section
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White)
-            ) {
-                Column(
-                    modifier = Modifier.padding(24.dp)
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(
-                                    brush = Brush.linearGradient(
-                                        colors = listOf(Color(0xFF059669), Color(0xFF10B981))
-                                    )
-                                ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                        Icon(Icons.Rounded.ContactMail, contentDescription = "Contact", tint = Color.White, modifier = Modifier.size(24.dp))
-                    }
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Text(
-                        text = "Get in Touch",
-                        style = TextStyle(
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF1E3A8A),
-                            fontFamily = Poppins
-                        )
-                    )
-                }
-                Spacer(modifier = Modifier.height(24.dp))
-                EnhancedContactItem(
-                    icon = Icons.Rounded.Email,
-                    title = "Email",
-                    subtitle = "suvojitsengupta21@gmail.com",
-                    gradient = Brush.linearGradient(
-                        colors = listOf(Color(0xFFEF4444), Color(0xFFF87171))
-                    ),
-                    onClick = { launchUrl(context, "mailto:suvojitsengupta21@gmail.com") }
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                EnhancedContactItem(
-                    icon = Icons.Rounded.Code,
-                    title = "GitHub",
-                    subtitle = "suvojit213",
-                    gradient = Brush.linearGradient(
-                        colors = listOf(Color(0xFF1E3A8A), Color(0xFF3B82F6))
-                    ),
-                    onClick = { launchUrl(context, "https://github.com/suvojit213") }
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        // Footer
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.LightGray.copy(alpha = 0.1f))
-        ) {
-            Column(
-                modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "© 2025 Suvojeet Sengupta",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        color = Color.DarkGray,
-                        fontWeight = FontWeight.W600,
-                        fontFamily = Poppins
-                    )
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Developed with ",
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            color = Color.Gray,
-                            fontWeight = FontWeight.W500,
-                            fontFamily = Poppins
-                        )
-                    )
-                    Icon(Icons.Rounded.Favorite, contentDescription = "Love", tint = Color(0xFFEF4444), modifier = Modifier.size(16.dp))
-                    Text(
-                        text = " using Compose",
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            color = Color.Gray,
-                            fontWeight = FontWeight.W500,
-                            fontFamily = Poppins
-                        )
-                    )
-                }
-            }
-        }
-    }
-}
+                    contentDescription = 
