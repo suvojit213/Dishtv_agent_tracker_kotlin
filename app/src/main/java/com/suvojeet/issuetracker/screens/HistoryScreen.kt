@@ -101,6 +101,7 @@ import com.suvojeet.issuetracker.data.dataStore
 import java.time.format.DateTimeParseException
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.rounded.Warning
+import androidx.datastore.preferences.core.edit
 
 @Composable
 fun HistoryScreen(navController: NavController) {
@@ -580,7 +581,7 @@ fun HistoryList(
                                 val updatedHistory = currentHistory.toMutableSet()
                                 val entryToDelete = filteredHistory[idx]
                                 updatedHistory.remove(entryToDelete)
-                                preferences[UserPreferencesRepository.PreferencesKeys.ISSUE_HISTORY] = updatedHistory
+                                preferences[UserPreferencesRepository.PreferencesKeys.ISSUE_HISTORY] = updatedHistory.toSet()
                             }
                             snackbarHostState.showSnackbar(
                                 message = "Entry deleted successfully",

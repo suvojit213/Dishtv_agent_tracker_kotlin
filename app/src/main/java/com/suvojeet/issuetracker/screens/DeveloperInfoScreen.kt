@@ -181,4 +181,187 @@ fun DeveloperInfoScreen(navController: NavController) {
             ) {
                 Icon(
                     imageVector = Icons.Rounded.ArrowBackIosNew,
-                    contentDescription = 
+                    contentDescription = "Back",
+                    tint = Color.White,
+                    modifier = Modifier.padding(10.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                text = "Developer Info",
+                style = TextStyle(
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    fontFamily = Poppins
+                )
+            )
+        }
+
+        // Profile Section
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .alpha(fadeAnimation),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.developer_profile),
+                contentDescription = "Developer Profile",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(120.dp)
+                    .clip(CircleShape)
+                    .border(4.dp, Color.White, CircleShape)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Suvojeet Singh",
+                style = TextStyle(
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.White,
+                    fontFamily = Poppins
+                ),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = "Android & Full-Stack Developer",
+                style = TextStyle(
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.White.copy(alpha = 0.8f),
+                    fontFamily = Poppins
+                ),
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.1f))
+            ) {
+                Column(
+                    modifier = Modifier.padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Passionate about crafting innovative solutions and building seamless user experiences.",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            color = Color.White.copy(alpha = 0.9f),
+                            fontFamily = Poppins
+                        ),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Skills Section
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .alpha(fadeAnimation),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                text = "Skills",
+                style = TextStyle(
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    fontFamily = Poppins
+                )
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                EnhancedSkillTag(skill = "Kotlin")
+                EnhancedSkillTag(skill = "Jetpack Compose")
+                EnhancedSkillTag(skill = "Android Development")
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                EnhancedSkillTag(skill = "Java")
+                EnhancedSkillTag(skill = "Python")
+                EnhancedSkillTag(skill = "Full-Stack")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Contact Section
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .alpha(fadeAnimation)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "Contact & Links",
+                style = TextStyle(
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    fontFamily = Poppins
+                )
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+
+            EnhancedContactItem(
+                icon = Icons.Rounded.Email,
+                label = "Email: suvojeet.singh@example.com"
+            ) {
+                launchUrl(context, "mailto:suvojeet.singh@example.com")
+            }
+
+            EnhancedContactItem(
+                icon = Icons.Rounded.Code,
+                label = "GitHub: github.com/suvojeet"
+            ) {
+                launchUrl(context, "https://github.com/suvojeet")
+            }
+
+            EnhancedContactItem(
+                icon = Icons.Rounded.TrackChanges,
+                label = "LinkedIn: linkedin.com/in/suvojeet"
+            ) {
+                launchUrl(context, "https://www.linkedin.com/in/suvojeet")
+            }
+
+            EnhancedContactItem(
+                icon = Icons.Rounded.DataObject,
+                label = "Portfolio: suvojeet.dev"
+            ) {
+                launchUrl(context, "https://suvojeet.dev")
+            }
+
+            EnhancedContactItem(
+                icon = Icons.Outlined.Info,
+                label = "About App"
+            ) {
+                navController.navigate("about_app")
+            }
+
+            EnhancedContactItem(
+                icon = Icons.Rounded.Favorite,
+                label = "Credits"
+            ) {
+                navController.navigate("credits")
+            }
+        }
+    }
+}

@@ -626,7 +626,7 @@ fun EnhancedTimeSelector(
                             text = formatTime(hour, minute, period),
                             style = TextStyle(
                                 fontSize = 16.sp,
-                                color = if (hour == -1 || minute == -1) Color.Gray else (gradient as? Brush.LinearGradient)?.colors?.first() ?: Color.Black,
+                                color = if (hour == -1 || minute == -1) Color.Gray else (gradient as? LinearGradient)?.colors?.first() ?: Color.Black,
                                 fontWeight = FontWeight.W600,
                             )
                         )

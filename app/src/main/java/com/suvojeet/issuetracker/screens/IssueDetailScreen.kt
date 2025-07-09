@@ -159,7 +159,7 @@ fun TimeInfoCard(issueDetails: Map<String, String>) {
 
 @Composable
 fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) {
-    val showImageDialog by remember { mutableStateOf<String?>(null) }
+    val showImageDialog = remember { mutableStateOf<String?>(null) }
 
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -179,7 +179,7 @@ fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) 
             ) {
                 items(imagePaths) { imagePath ->
                     Image(
-                        painter = rememberAsyncImagePainter(java.io.File(imagePath)),
+                        painter = rememberAsyncImagePainter(imagePath),
                         contentDescription = null,
                         modifier = Modifier
                             .size(100.dp)
@@ -192,7 +192,7 @@ fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) 
         }
     }
 
-    showImageDialog.value?.let { imagePath ->
+    if (showImageDialog.value != null) {
         Dialog(onDismissRequest = { showImageDialog.value = null }) {
             Box(
                 modifier = Modifier
@@ -201,13 +201,13 @@ fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) 
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = rememberAsyncImagePainter(File(imagePath)),
+                    painter = rememberAsyncImagePainter(showImageDialog.value),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Fit
                 )
                 IconButton(
-                    onClick = { shareImage(context, imagePath) },
+                    onClick = { shareImage(context, showImageDialog.value!!) },
                     modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)
                 ) {
                     Icon(Icons.Rounded.Download, contentDescription = "Download", tint = Color.White, modifier = Modifier.size(36.dp))
