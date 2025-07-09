@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Feedback
 import androidx.compose.material.icons.rounded.PersonOutline
 import androidx.compose.material.icons.rounded.Send
 import androidx.compose.material.icons.rounded.Star
@@ -187,7 +188,7 @@ fun FeedbackScreen(navController: NavController) {
                         maxLines = 5,
                         leadingIcon = {
                             Column(modifier = Modifier.padding(top = 12.dp)) { // Adjust padding to align icon at top
-                                Icon(Icons.Rounded.Feedback, contentDescription = "Feedback")
+                                Icon(Icons.Outlined.Feedback, contentDescription = "Feedback")
                             }
                         },
                         colors = TextFieldDefaults.colors(

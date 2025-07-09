@@ -21,7 +21,7 @@ import androidx.compose.material.icons.rounded.AdminPanelSettings
 import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.DataObject
 import androidx.compose.material.icons.rounded.Feedback
-import androidx.compose.material.icons.rounded.InfoOutlined
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.PeopleOutline
 import androidx.compose.material.icons.rounded.PersonOutline
 import androidx.compose.material3.AlertDialog
@@ -122,7 +122,7 @@ fun SettingsScreen(navController: NavController) {
                     modifier = Modifier.padding(vertical = 8.dp)
                 ) {
                     SettingsTile(
-                        icon = Icons.Rounded.InfoOutlined,
+                        icon = Icons.Outlined.Info,
                         title = "About App",
                         subtitle = "Learn more about the Issue Tracker App",
                         onClick = { navController.navigate("about_app") }
@@ -175,7 +175,7 @@ fun SettingsScreen(navController: NavController) {
                     label = { Text("Enter password") },
                     singleLine = true,
                     visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation(),
-                    keyboardOptions = androidx.compose.ui.text.input.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Password)
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                 )
             },
             confirmButton = {

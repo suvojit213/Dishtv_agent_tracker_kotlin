@@ -31,7 +31,7 @@ import androidx.compose.material.icons.rounded.ContactMail
 import androidx.compose.material.icons.rounded.DataObject
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Favorite
-import androidx.compose.material.icons.rounded.InfoOutlined
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.TrackChanges
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -239,11 +239,10 @@ fun DeveloperInfoScreen(navController: NavController) {
                                     brush = Brush.linearGradient(
                                         colors = listOf(Color(0xFF1E3A8A), Color(0xFF3B82F6))
                                     )
-                                )
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(Icons.Rounded.InfoOutlined, contentDescription = "About", tint = Color.White, modifier = Modifier.size(24.dp))
+                                ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                        Icon(Icons.Outlined.Info, contentDescription = "About", tint = Color.White, modifier = Modifier.size(24.dp))
                     }
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
@@ -290,8 +289,7 @@ fun DeveloperInfoScreen(navController: NavController) {
                                         brush = Brush.linearGradient(
                                             colors = listOf(Color(0xFF1E3A8A), Color(0xFF3B82F6))
                                         )
-                                    )
-                                ),
+                                    ),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Image(
@@ -362,10 +360,9 @@ fun DeveloperInfoScreen(navController: NavController) {
                                     brush = Brush.linearGradient(
                                         colors = listOf(Color(0xFF059669), Color(0xFF10B981))
                                     )
-                                )
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
+                                ),
+                                contentAlignment = Alignment.Center
+                            ) {
                         Icon(Icons.Rounded.ContactMail, contentDescription = "Contact", tint = Color.White, modifier = Modifier.size(24.dp))
                     }
                     Spacer(modifier = Modifier.width(16.dp))
@@ -450,96 +447,5 @@ fun DeveloperInfoScreen(navController: NavController) {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun EnhancedSkillTag(skill: String, color: Color) {
-    Box(
-        modifier = Modifier
-            .clip(RoundedCornerShape(20.dp))
-            .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(color, color.copy(alpha = 0.8f))
-                )
-            )
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-    ) {
-        Text(
-            text = skill,
-            style = TextStyle(
-                color = Color.White,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.W600,
-                fontFamily = Poppins
-            )
-        )
-    }
-}
-
-@Composable
-fun EnhancedContactItem(
-    icon: ImageVector,
-    title: String,
-    subtitle: String,
-    gradient: Brush,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        Row(
-            modifier = Modifier.padding(20.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(50.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(gradient),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(icon, contentDescription = title, tint = Color.White, modifier = Modifier.size(24.dp))
-            }
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(
-                    text = title,
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF1E3A8A),
-                        fontFamily = Poppins
-                    )
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = subtitle,
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        color = Color.Gray,
-                        fontWeight = FontWeight.W500,
-                        fontFamily = Poppins
-                    )
-                )
-            }
-            Icon(Icons.Rounded.ArrowBackIosNew, contentDescription = "Go", tint = Color.Gray, modifier = Modifier.size(16.dp).background(Color.LightGray.copy(alpha = 0.2f)).clip(RoundedCornerShape(8.dp)))
-        }
-    }
-}
-
-fun launchUrl(context: android.content.Context, url: String) {
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-    try {
-        context.startActivity(intent)
-    } catch (e: Exception) {
-        Toast.makeText(context, "Could not launch $url", Toast.LENGTH_SHORT).show()
     }
 }

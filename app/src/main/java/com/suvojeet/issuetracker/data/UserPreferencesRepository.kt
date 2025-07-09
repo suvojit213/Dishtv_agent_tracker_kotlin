@@ -15,7 +15,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "us
 
 class UserPreferencesRepository(private val context: Context) {
 
-    private object PreferencesKeys {
+    object PreferencesKeys {
         val CRM_ID = stringPreferencesKey("crmId")
         val TL_NAME = stringPreferencesKey("tlName")
         val OTHER_TL_NAME = stringPreferencesKey("otherTlName")

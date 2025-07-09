@@ -368,7 +368,7 @@ fun EnhancedTextField(
             value = value,
             onValueChange = onValueChange,
             modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = androidx.compose.ui.text.input.KeyboardOptions(keyboardType = keyboardType),
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
             singleLine = true,
             label = { Text(hint) },
             leadingIcon = {

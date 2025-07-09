@@ -26,7 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccessTime
 import androidx.compose.material.icons.rounded.AttachFile
 import androidx.compose.material.icons.rounded.Download
-import androidx.compose.material.icons.rounded.InfoOutlined
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -117,7 +117,7 @@ fun IssueInfoCard(issueDetails: Map<String, String>) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            SectionTitle(title = "Issue Information", icon = Icons.Rounded.InfoOutlined)
+            SectionTitle(title = "Issue Information", icon = Icons.Outlined.Info)
             Spacer(modifier = Modifier.height(12.dp))
             DetailRow(label = "Advisor Name", value = issueDetails["Advisor Name"] ?: "N/A")
             DetailRow(label = "CRM ID", value = issueDetails["CRM ID"] ?: "N/A")
@@ -179,7 +179,7 @@ fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) 
             ) {
                 items(imagePaths) { imagePath ->
                     Image(
-                        painter = rememberAsyncImagePainter(File(imagePath.toString())),
+                        painter = rememberAsyncImagePainter(File(imagePath)),
                         contentDescription = null,
                         modifier = Modifier
                             .size(100.dp)

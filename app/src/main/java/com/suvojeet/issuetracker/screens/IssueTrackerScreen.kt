@@ -45,7 +45,8 @@ import androidx.compose.material.icons.rounded.Send
 import androidx.compose.material.icons.rounded.StopCircle
 import androidx.compose.material.icons.rounded.SupervisorAccount
 import androidx.compose.material.icons.outlined.Badge
-import androidx.compose.material.icons.outlined.InfoOutlined
+import androidx.compose.ui.graphics.LinearGradient
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -282,7 +283,7 @@ fun IssueTrackerScreen(navController: NavController) {
                         .clickable { navController.navigate("developer_info") }
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.InfoOutlined,
+                        imageVector = Icons.Outlined.Info,
                         contentDescription = "Info",
                         tint = Color.White,
                         modifier = Modifier.padding(8.dp)
@@ -480,7 +481,7 @@ fun IssueTrackerScreen(navController: NavController) {
                                 .background(Color(0xFF1E3A8A).copy(alpha = 0.1f)),
                             contentAlignment = Alignment.Center
                         ) {
-                            Icon(Icons.Rounded.InfoOutlined, contentDescription = "Info", tint = Color(0xFF1E3A8A), modifier = Modifier.size(20.dp))
+                            Icon(Icons.Outlined.Info, contentDescription = "Info", tint = Color(0xFF1E3A8A), modifier = Modifier.size(20.dp))
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Text(
@@ -753,7 +754,7 @@ fun AttachmentSection(
                     columns = GridCells.Fixed(3),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.height(if (images.isEmpty()) 120.dp else ((images.size / 3) + 1) * 120.dp) // Adjust height dynamically
+                    modifier = Modifier.height(if (images.isEmpty()) 120.dp else (((images.size / 3) + 1) * 120).dp) // Adjust height dynamically
                 ) {
                     itemsIndexed(images) { index, uri ->
                         Box(

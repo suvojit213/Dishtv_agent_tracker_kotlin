@@ -43,7 +43,7 @@ import androidx.compose.material.icons.rounded.DeleteForever
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.History
-import androidx.compose.material.icons.rounded.InfoOutlined
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.PlayCircleOutline
 import androidx.compose.material.icons.rounded.ReportProblem
 import androidx.compose.material.icons.rounded.SearchOff
@@ -574,17 +574,20 @@ fun HistoryList(
                     },
                     onDelete = { idx ->
                         coroutineScope.launch {
-                            val currentHistory = userPreferencesRepository.issueHistory.first().toMutableSet()
-                            val entryToDelete = filteredHistory[idx]
-                            currentHistory.remove(entryToDelete)
-                            userPreferencesRepository.clearIssueHistory() // Clear and re-add to update the set
-                            currentHistory.forEach { entry -> launch { userPreferencesRepository.addIssueToHistory(entry) } }
+                            userPreferencesRepository.dataStore.edit { preferences ->
+                                val currentHistory = preferences[UserPreferencesRepository.PreferencesKeys.ISSUE_HISTORY] ?: emptySet()
+                                val updatedHistory = currentHistory.toMutableSet()
+                                val entryToDelete = filteredHistory[idx]
+                                updatedHistory.remove(entryToDelete)
+                                preferences[UserPreferencesRepository.PreferencesKeys.ISSUE_HISTORY] = updatedHistory
+                            }
                             snackbarHostState.showSnackbar(
                                 message = "Entry deleted successfully",
                                 withDismissAction = true
                             )
                         }
-                    }
+                    },
+                    context = context
                 )
             }
         }
@@ -902,10 +905,10 @@ fun ClearHistoryDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
                     modifier = Modifier
                         .size(48.dp)
                         .clip(RoundedCornerShape(12.dp))
-                        .background(Color.Orange.copy(alpha = 0.1f)),
+                        .background(Color.Yellow.copy(alpha = 0.1f)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(Icons.Rounded.Warning, contentDescription = "Warning", tint = Color.Orange, modifier = Modifier.size(32.dp))
+                    Icon(Icons.Rounded.Warning, contentDescription = "Warning", tint = Color.Yellow, modifier = Modifier.size(32.dp))
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(

@@ -26,7 +26,7 @@ import androidx.compose.material.icons.outlined.SupervisorAccount
 import androidx.compose.material.icons.rounded.AddTask
 import androidx.compose.material.icons.rounded.CalendarToday
 import androidx.compose.material.icons.rounded.Edit
-import androidx.compose.material.icons.rounded.InfoOutlined
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.TaskAlt
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -195,7 +195,7 @@ fun DashboardScreen(navController: NavController) {
                     IconButton(
                         onClick = { navController.navigate("developer_info") }
                     ) {
-                        Icon(Icons.Rounded.InfoOutlined, contentDescription = "Info", tint = Color.White)
+                        Icon(Icons.Outlined.Info, contentDescription = "Info", tint = Color.White)
                     }
                 }
 
@@ -292,7 +292,7 @@ fun DashboardScreen(navController: NavController) {
                         modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3B82F6)),
                         shape = RoundedCornerShape(10.dp),
-                        elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 4.dp)
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
                     ) {
                         Icon(Icons.Rounded.Edit, contentDescription = "Edit", tint = Color.White)
                         Spacer(modifier = Modifier.width(8.dp))
@@ -361,7 +361,7 @@ fun DashboardScreen(navController: NavController) {
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = Color.White,
                     shape = RoundedCornerShape(16.dp),
-                    elevation = ButtonDefaults.floatingActionButtonElevation(defaultElevation = 4.dp),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
                     icon = { Icon(Icons.Rounded.AddTask, contentDescription = "Fill Issue Tracker") },
                     text = { Text("Fill Issue Tracker") }
                 )
@@ -370,7 +370,7 @@ fun DashboardScreen(navController: NavController) {
                     onClick = { navController.navigate("issue_tracker") },
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = Color.White,
-                    elevation = ButtonDefaults.floatingActionButtonElevation(defaultElevation = 4.dp)
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
                 ) {
                     Icon(Icons.Rounded.AddTask, contentDescription = "Fill Issue Tracker")
                 }
