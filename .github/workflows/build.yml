@@ -42,7 +42,7 @@ jobs:
       # Step 5: Ab banaye gaye Gradle Wrapper se App ko build karna
       # Ab humein 100% pata hai ki gradlew file maujood hai
       - name: Build with Gradle Wrapper
-        run: ./gradlew assembleRelease
+        run: ./gradlew clean assembleRelease
 
       # Step 6: Release hone par APK ko upload karna
       - name: Upload APK to GitHub Release
