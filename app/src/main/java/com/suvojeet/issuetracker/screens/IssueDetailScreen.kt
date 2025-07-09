@@ -39,6 +39,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -173,11 +175,11 @@ fun AttachmentsCard(context: android.content.Context, imagePaths: List<String>) 
                 columns = GridCells.Fixed(3),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.height(imagePaths.size * 100.dp) // Adjust height based on image count
+                modifier = Modifier.height((imagePaths.size * 100).dp) // Adjust height based on image count
             ) {
                 items(imagePaths) { imagePath ->
                     Image(
-                        painter = rememberAsyncImagePainter(File(imagePath)),
+                        painter = rememberAsyncImagePainter(File(imagePath.toString())),
                         contentDescription = null,
                         modifier = Modifier
                             .size(100.dp)

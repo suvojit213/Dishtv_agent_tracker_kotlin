@@ -81,6 +81,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -97,6 +98,8 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material.icons.rounded.Warning
 
 @Composable
 fun HistoryScreen(navController: NavController) {
@@ -232,7 +235,7 @@ fun HistoryScreen(navController: NavController) {
             }
 
             // Content
-            if (issueHistory.isEmpty) {
+            if (issueHistory.isEmpty()) {
                 EmptyState(
                     onRecordFirstIssue = {
                         navController.navigate("issue_tracker") {
@@ -375,7 +378,7 @@ fun HistoryScreen(navController: NavController) {
                     if (filteredHistory.isEmpty()) {
                         NoResultsState()
                     } else {
-                        HistoryList(filteredHistory, navController, userPreferencesRepository, snackbarHostState)
+                        HistoryList(filteredHistory, navController, userPreferencesRepository, snackbarHostState, context)
                     }
                 }
             }
@@ -406,7 +409,7 @@ fun HistoryScreen(navController: NavController) {
                     val entryToDelete = filteredHistory[indexToDelete]
                     currentHistory.remove(entryToDelete)
                     userPreferencesRepository.clearIssueHistory() // Clear and re-add to update the set
-                    currentHistory.forEach { userPreferencesRepository.addIssueToHistory(it) }
+                    currentHistory.forEach { entry -> launch { userPreferencesRepository.addIssueToHistory(entry) } }
                     showDeleteEntryDialog = null
                     snackbarHostState.showSnackbar(
                         message = "Entry deleted successfully",
@@ -538,7 +541,8 @@ fun HistoryList(
     filteredHistory: List<String>,
     navController: NavController,
     userPreferencesRepository: UserPreferencesRepository,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    context: android.content.Context
 ) {
     val coroutineScope = rememberCoroutineScope()
     Column(
@@ -566,7 +570,7 @@ fun HistoryList(
                     index = index,
                     navController = navController,
                     onShare = { parsedEntry, imagePaths ->
-                        shareIssue(LocalContext.current, parsedEntry, imagePaths)
+                        shareIssue(context, parsedEntry, imagePaths)
                     },
                     onDelete = { idx ->
                         coroutineScope.launch {
@@ -574,7 +578,7 @@ fun HistoryList(
                             val entryToDelete = filteredHistory[idx]
                             currentHistory.remove(entryToDelete)
                             userPreferencesRepository.clearIssueHistory() // Clear and re-add to update the set
-                            currentHistory.forEach { userPreferencesRepository.addIssueToHistory(it) }
+                            currentHistory.forEach { entry -> launch { userPreferencesRepository.addIssueToHistory(entry) } }
                             snackbarHostState.showSnackbar(
                                 message = "Entry deleted successfully",
                                 withDismissAction = true
@@ -593,7 +597,8 @@ fun HistoryItem(
     index: Int,
     navController: NavController,
     onShare: (Map<String, String>, List<String>) -> Unit,
-    onDelete: (Int) -> Unit
+    onDelete: (Int) -> Unit,
+    context: android.content.Context
 ) {
     val parsedEntry = parseHistoryEntry(entry)
     val imagePaths = parsedEntry["Images"]?.split('|') ?: emptyList()
@@ -602,7 +607,7 @@ fun HistoryItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                navController.navigate("issue_detail/${Uri.encodeQueryToString(parsedEntry.entries.associate { it.key to it.value }.toString())}/${Uri.encodeQueryToString(imagePaths.joinToString(","))}")
+                // navController.navigate("issue_detail/${Uri.encodeQueryToString(parsedEntry.entries.associate { it.key to it.value }.toString())}/${Uri.encodeQueryToString(imagePaths.joinToString(","))}")
             },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
@@ -775,7 +780,7 @@ fun HistoryItem(
                     columns = GridCells.Fixed(3),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.height(imagePaths.size * 100.dp) // Adjust height based on image count
+                    modifier = Modifier.height((imagePaths.size * 100).dp) // Adjust height based on image count
                 ) {
                     items(imagePaths) { imagePath ->
                         var showImageDialog by remember { mutableStateOf(false) }

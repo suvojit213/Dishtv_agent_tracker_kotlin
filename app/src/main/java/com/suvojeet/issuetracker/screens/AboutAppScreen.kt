@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -141,12 +142,12 @@ fun AboutAppScreen(navController: NavController) {
                 )
             )
             Spacer(modifier = Modifier.height(16.dp))
-            MotivePoint('Intuitive User Interface', 'A clean, modern, and easy-to-navigate design ensures a smooth user experience for all advisors.')
-            MotivePoint('Automated Data Pre-filling', 'Say goodbye to repetitive typing. The app intelligently pre-fills relevant information into the Google Form, including user details, organization preference, and current date.')
-            MotivePoint('Dynamic Team Leader Selection', 'Easily select your team leader from a predefined list or add a new one, ensuring accurate reporting hierarchies.')
-            MotivePoint('Precise Issue Timing', 'Accurately log the start and end times of issues with a user-friendly time picker, providing comprehensive data for analysis.')
-            MotivePoint('Persistent Preferences', 'The app remembers your organization (DISH/D2H) and other key details, minimizing setup time for subsequent issue reports.')
-            MotivePoint('In-App Webview', 'Experience a fully integrated workflow as the Google Form opens directly within the app, eliminating the need to switch between applications.')
+            MotivePoint("Intuitive User Interface", "A clean, modern, and easy-to-navigate design ensures a smooth user experience for all advisors.")
+            MotivePoint("Automated Data Pre-filling", "Say goodbye to repetitive typing. The app intelligently pre-fills relevant information into the Google Form, including user details, organization preference, and current date.")
+            MotivePoint("Dynamic Team Leader Selection", "Easily select your team leader from a predefined list or add a new one, ensuring accurate reporting hierarchies.")
+            MotivePoint("Precise Issue Timing", "Accurately log the start and end times of issues with a user-friendly time picker, providing comprehensive data for analysis.")
+            MotivePoint("Persistent Preferences", "The app remembers your organization (DISH/D2H) and other key details, minimizing setup time for subsequent issue reports.")
+            MotivePoint("In-App Webview", "Experience a fully integrated workflow as the Google Form opens directly within the app, eliminating the need to switch between applications.")
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = "An Open-Source Initiative for the Community",

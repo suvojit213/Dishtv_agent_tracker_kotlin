@@ -916,7 +916,7 @@ fun IssueRemarksField(
                     },
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.White,
-                        unfocusedContainerContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
                         disabledContainerColor = Color.White,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,

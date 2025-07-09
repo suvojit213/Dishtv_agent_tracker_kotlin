@@ -14,6 +14,14 @@ import androidx.navigation.compose.rememberNavController
 import com.suvojeet.issuetracker.ui.theme.IssueTrackerTheme
 import com.suvojeet.issuetracker.screens.SplashScreen
 import com.suvojeet.issuetracker.screens.MainAppScreen
+import com.suvojeet.issuetracker.screens.InitialSetupScreen
+import com.suvojeet.issuetracker.screens.DeveloperInfoScreen
+import com.suvojeet.issuetracker.screens.EditProfileScreen
+import com.suvojeet.issuetracker.screens.GoogleFormWebviewScreen
+import com.suvojeet.issuetracker.screens.AdminSettingsScreen
+import com.suvojeet.issuetracker.screens.AboutAppScreen
+import com.suvojeet.issuetracker.screens.CreditsScreen
+import com.suvojeet.issuetracker.screens.FeedbackScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

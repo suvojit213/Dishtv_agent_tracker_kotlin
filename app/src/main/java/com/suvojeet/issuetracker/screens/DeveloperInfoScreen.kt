@@ -274,7 +274,7 @@ fun DeveloperInfoScreen(navController: NavController) {
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = Color(0xFF1E3A8A).copy(alpha = 0.1f)),
                     shape = RoundedCornerShape(16.dp),
-                    border = CardDefaults.outlinedCardBorder(true)
+                    border = CardDefaults.outlinedCardBorder
                 ) {
                     Column(
                         modifier = Modifier.padding(20.dp)

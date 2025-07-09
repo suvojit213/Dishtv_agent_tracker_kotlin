@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PersonOutline
@@ -88,7 +90,7 @@ fun FeedbackScreen(navController: NavController) {
             append("*Name:* \$name")
         }
 
-        val encodedMessage = Uri.encodeComponent(message)
+        val encodedMessage = java.net.URLEncoder.encode(message, "UTF-8")
         val whatsappUri = Uri.parse("https://wa.me/\$phoneNumber?text=\${encodedMessage}")
 
         val intent = Intent(Intent.ACTION_VIEW, whatsappUri)
