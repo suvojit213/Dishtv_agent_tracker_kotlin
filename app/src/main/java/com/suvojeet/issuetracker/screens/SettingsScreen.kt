@@ -175,8 +175,7 @@ fun SettingsScreen(navController: NavController) {
                     onValueChange = { adminPasswordInput = it },
                     label = { Text("Enter password") },
                     singleLine = true,
-                    visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                    visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation()
                 )
             },
             confirmButton = {
