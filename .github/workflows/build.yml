@@ -39,7 +39,15 @@ jobs:
           echo "Gradle wrapper banaya ja raha hai repository root mein..."
           gradle wrapper
 
-      # Step 5: Ab banaye gaye Gradle Wrapper se App ko build karna
+      # Step 5: Verify SettingsScreen.kt content
+      - name: Print SettingsScreen.kt content
+        run: cat app/src/main/java/com/suvojeet/issuetracker/screens/SettingsScreen.kt
+
+      # Step 6: Verify IssueParser.kt content
+      - name: Print IssueParser.kt content
+        run: cat app/src/main/java/com/suvojeet/issuetracker/utils/IssueParser.kt
+
+      # Step 7: Ab banaye gaye Gradle Wrapper se App ko build karna
       # Ab humein 100% pata hai ki gradlew file maujood hai
       - name: Build with Gradle Wrapper
         run: ./gradlew clean assembleRelease
